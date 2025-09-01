@@ -12,7 +12,7 @@ import Plinth
 
 public typealias RGBPixel<Scalar> = (red: Scalar, green: Scalar, blue: Scalar)
 
-public struct RGBMatrix<Scalar> where Scalar: Real {
+public struct RGBMatrix<Scalar> {
 
     public typealias Matrix = Plinth.Matrix<Scalar>
     public typealias Pixel = RGBPixel<Scalar>
@@ -44,7 +44,7 @@ public struct RGBMatrix<Scalar> where Scalar: Real {
     }
 
     public init(shape: Shape, _ closure: @autoclosure () throws -> Pixel) rethrows {
-        var elements: [Complex] = []
+        var elements: [Pixel] = []
         elements.reserveCapacity(shape.count)
         for _ in 0..<shape.count {
             elements.append(try closure())
@@ -53,7 +53,7 @@ public struct RGBMatrix<Scalar> where Scalar: Real {
     }
 
     public init(shape: Shape, _ closure: (_ row: Int, _ column: Int) throws -> Pixel) rethrows {
-        var elements: [Complex] = []
+        var elements: [Pixel] = []
         elements.reserveCapacity(shape.count)
         for row in shape.rowIndices {
             for column in shape.columnIndices {
@@ -240,7 +240,7 @@ extension RGBMatrix: CustomStringConvertible where Scalar: CustomStringConvertib
 
 extension RGBMatrix: Equatable where Scalar: Equatable {
 
-   public static func == (left: ComplexMatrix, right: ComplexMatrix) -> Bool {
+   public static func == (left: RGBMatrix, right: RGBMatrix) -> Bool {
        return left.red == right.red && left.green == right.green && left.blue == right.blue
    }
 
@@ -303,7 +303,7 @@ extension RGBMatrix: Collection {
    }
 
    public subscript(_ index: Index) -> Pixel {
-       return Complex(red[index], green[index], blue[index])
+       return (red: red[index], green: green[index], blue: blue[index])
    }
 
 }
