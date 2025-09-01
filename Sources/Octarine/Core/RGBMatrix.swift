@@ -1,8 +1,8 @@
 //
 //  RGBMatrix.swift
-//  Plinth
+//  Octarine
 //
-//  Created by June Russell on 01/09/2025.
+//  Created by Daniel Clelland on 01/09/2025.
 //
 
 import Foundation
@@ -61,6 +61,27 @@ public struct RGBMatrix<Scalar> where Scalar: Real {
             }
         }
         self.init(shape: shape, elements: elements)
+    }
+
+}
+
+extension RGBMatrix where Scalar == Float {
+
+    public init(hue: Matrix, saturation: Matrix, brightness: Matrix) {
+        let sextant = hue * 6.0
+        let chroma = brightness * saturation
+        let match = brightness - chroma
+
+        let sector = sextant.floor()
+        let sectors = (0..<6).map { sector == Scalar($0) }
+        let ramp = sextant.remainder(.init(shape: shape, repeating: 2.0)).absolute()
+        let ramps = (0..<6).map { sectors[$0] * ramp }
+
+        self.init(
+            red: (ramps[4] + sectors[5] + sectors[0] + ramps[1]) * chroma + match,
+            green: (ramps[0] + sectors[1] + sectors[2] + ramps[3]) * chroma + match,
+            blue: (ramps[2] + sectors[3] + sectors[4] + ramps[5]) * chroma + match
+        )
     }
 
 }

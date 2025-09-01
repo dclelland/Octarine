@@ -35,16 +35,8 @@ import Octarine
 
 ## Todo
 
-### Core
-
-- [ ] `RGBImage`
-- [ ] `RGBPixel`
-
-### Extensions
-
-- [ ] `Matrix`
-- [ ] `ComplexMatrix`
-- [ ] `RGBImage`
+- [ ] `RGBMatrix.Malformation` is not complete
+- [ ] `RGBMatrix+Image` should support `UInt8`
 
 # Documentation
 

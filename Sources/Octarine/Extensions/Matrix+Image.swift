@@ -8,6 +8,7 @@
 import Foundation
 import Accelerate
 import CoreImage
+import Plinth
 
 #if os(macOS)
 
