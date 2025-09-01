@@ -95,75 +95,79 @@ extension RGBMatrix {
 
 extension RGBMatrix {
 
-    public enum State: CustomStringConvertible {
-
-        case regular
-        case malformed(_ malformation: Malformation)
-
-        public var description: String {
-            switch self {
-            case .regular:
-                return "Regular"
-            case .malformed(let malformation):
-                return "Malformed: \(malformation)"
-            }
-        }
-
-    }
-
-    public struct Malformation: CustomStringConvertible {
-
-        public let red: Matrix.Malformation?
-        public let green: Matrix.Malformation?
-        public let blue: Matrix.Malformation?
-
-        // public var description: String {
-        //     switch self {
-        //     case .parts(let real, let imaginary):
-        //         return "Malformed real part: \(real); Malformed imaginary part: \(imaginary)"
-        //     case .realPart(let real):
-        //         return "Malformed real part: \(real)"
-        //     case .imaginaryPart(let imaginary):
-        //         return "Malformed imaginary part: \(imaginary)"
-        //     case .shapeMismatch(let real, let imaginary):
-        //         return "Shape mismatch between real and imaginary parts; \(real) ≠ \(imaginary)"
-        //     }
-        // }
-
-    }
-
-    public var state: State {
-        switch (red.state, green.state, blue.state) {
-            case (.regular, .regular, .regular):
-                guard (red.shape == green.shape == blue.shape) else {
-
-                }
-                return .regular
-            default:
-                return Malformation(red: red.state, green: green.state, blue: blue.state)
-        }
-
-        // switch (real.state, imaginary.state) {
-        // case (.malformed(let real), .malformed(let imaginary)):
-        //     return .malformed(.parts(real, imaginary))
-        // case (.malformed(let real), .regular):
-        //     return .malformed(.realPart(real))
-        // case (.regular, .malformed(let imaginary)):
-        //     return .malformed(.imaginaryPart(imaginary))
-        // case (.regular, .regular):
-        //     guard real.shape == imaginary.shape else {
-        //         return .malformed(.shapeMismatch(real.shape, imaginary.shape))
-        //     }
-
-        //     return .regular
-        // }
-    }
+    //    public enum State: CustomStringConvertible {
+    //
+    //        case regular
+    //        case malformed(_ malformation: Malformation)
+    //
+    //        public var description: String {
+//            switch self {
+//            case .regular:
+//                return "Regular"
+//            case .malformed(let malformation):
+//                return "Malformed: \(malformation)"
+//            }
+//        }
+//
+//    }
+//
+//    public struct Malformation: CustomStringConvertible {
+//
+//        public let red: Matrix.Malformation?
+//        public let green: Matrix.Malformation?
+//        public let blue: Matrix.Malformation?
+//
+//        public var description: String {
+//            switch self {
+//            case .parts(let real, let imaginary):
+//                return "Malformed real part: \(real); Malformed imaginary part: \(imaginary)"
+//            case .realPart(let real):
+//                return "Malformed real part: \(real)"
+//            case .imaginaryPart(let imaginary):
+//                return "Malformed imaginary part: \(imaginary)"
+//            case .shapeMismatch(let real, let imaginary):
+//                return "Shape mismatch between real and imaginary parts; \(real) ≠ \(imaginary)"
+//            }
+//        }
+//
+//    }
+//
+//    public var state: State {
+//        switch (red.state, green.state, blue.state) {
+//            case (.regular, .regular, .regular):
+//                guard (red.shape == green.shape == blue.shape) else {
+//
+//                }
+//                return .regular
+//            default:
+//                return Malformation(red: red.state, green: green.state, blue: blue.state)
+//        }
+//
+//        switch (real.state, imaginary.state) {
+//        case (.malformed(let real), .malformed(let imaginary)):
+//            return .malformed(.parts(real, imaginary))
+//        case (.malformed(let real), .regular):
+//            return .malformed(.realPart(real))
+//        case (.regular, .malformed(let imaginary)):
+//            return .malformed(.imaginaryPart(imaginary))
+//        case (.regular, .regular):
+//            guard real.shape == imaginary.shape else {
+//                return .malformed(.shapeMismatch(real.shape, imaginary.shape))
+//            }
+//
+//            return .regular
+//        }
+//    }
 
     public var shape: Shape {
         return Shape(
-            rows: Swift.min(red.shape.rows, green.shape.rows, blue.shape.rows),
-            columns: Swift.min(red.shape.columns, green.shape.columns, blue.shape.columns)
+            rows: parts.map(\.shape.rows).min()!,
+            columns: parts.map(\.shape.columns).min()!
         )
+    }
+
+    public var parts: [Matrix] {
+        return [red, green, blue]
     }
 
 }
@@ -223,7 +227,7 @@ extension RGBMatrix: CustomStringConvertible where Scalar: CustomStringConvertib
 extension RGBMatrix: Equatable where Scalar: Equatable {
 
    public static func == (left: RGBMatrix, right: RGBMatrix) -> Bool {
-       return left.red == right.red && left.green == right.green && left.blue == right.blue
+       return left.parts == right.parts
    }
 
 }
@@ -231,9 +235,7 @@ extension RGBMatrix: Equatable where Scalar: Equatable {
 extension RGBMatrix: Hashable where Scalar: Hashable {
 
    public func hash(into hasher: inout Hasher) {
-       hasher.combine(red)
-       hasher.combine(green)
-       hasher.combine(blue)
+       hasher.combine(parts)
    }
 
 }

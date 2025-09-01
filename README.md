@@ -35,7 +35,7 @@ import Octarine
 
 ## Todo
 
-- [ ] `RGBMatrix.swift`: `RGBMatrix.Malformation` is not complete
+- [ ] Reinstantiate matrix validation
 - [ ] `RGBImages.swift`: Add `RGBMatrix<UInt8>` support
 - [ ] `Colormaps.swift`: `ComplexMatrix.saturation` should call `Matrix.reciprocal`
 
