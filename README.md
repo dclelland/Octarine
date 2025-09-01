@@ -37,7 +37,7 @@ import Octarine
 
 - [ ] Reinstantiate matrix validation
 - [ ] `RGBImages.swift`: Add `RGBMatrix<UInt8>` support
-- [ ] `Colormaps.swift`: `ComplexMatrix.saturation` should call `Matrix.reciprocal`
+- [ ] `Colormaps.swift`: `ComplexMatrix.saturation()` should call `Matrix.reciprocal()`
 
 # Documentation
 

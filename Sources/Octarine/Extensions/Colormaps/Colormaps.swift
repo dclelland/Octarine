@@ -33,26 +33,26 @@ extension RGBMatrix where Scalar == Float {
 
 extension ComplexMatrix where Scalar == Float {
 
-    public var colormap: RGBMatrix<Scalar> {
-        return RGBMatrix(hue: hue, saturation: saturation, brightness: brightness)
+    public func colormap() -> RGBMatrix<Scalar> {
+        return RGBMatrix(hue: hue(), saturation: saturation(), brightness: brightness())
     }
 
 }
 
 extension ComplexMatrix where Scalar == Float {
 
-    public var hue: Matrix {
+    public func hue() -> Matrix {
         return (phase() + (2.0 * .pi))
             .truncatingRemainder(.init(shape: shape, repeating: 2.0 * .pi))
             .normalized(from: 0.0...(2.0 * .pi))
     }
 
-    public var saturation: Matrix {
+    public func saturation() -> Matrix {
         return 1.0 / absolute()
             .threshold(to: 1.0, with: .clampToThreshold),
     }
 
-    public var brightness: Matrix {
+    public func brightness() -> Matrix {
         return absolute()
             .clip(to: 0.0...1.0)
     }
