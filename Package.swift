@@ -13,7 +13,7 @@ let package = Package(
         .library(name: "Octarine", targets: ["Octarine"])
     ],
     dependencies: [
-        .package(url: "https://github.com/dclelland/Plinth", from: "2.11.0")
+        .package(url: "https://github.com/dclelland/Plinth", from: "2.12.0")
     ],
     targets: [
         .target(
