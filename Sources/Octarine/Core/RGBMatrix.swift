@@ -211,18 +211,18 @@ extension RGBMatrix: ExpressibleByArrayLiteral {
 
 }
 
-extension RGBMatrix: CustomStringConvertible where Scalar: CustomStringConvertible {
-
-   public var description: String {
-       switch state {
-       case .regular:
-           return "[[" + grid.map { $0.map(\.description).joined(separator: ", ") }.joined(separator: "],\n [") + "]]"
-       case .malformed(let malformation):
-           return "Malformed \(type(of: self)): \(malformation)"
-       }
-   }
-
-}
+//extension RGBMatrix: CustomStringConvertible where Scalar: CustomStringConvertible {
+//
+//   public var description: String {
+//       switch state {
+//       case .regular:
+//           return "[[" + grid.map { $0.map(\.description).joined(separator: ", ") }.joined(separator: "],\n [") + "]]"
+//       case .malformed(let malformation):
+//           return "Malformed \(type(of: self)): \(malformation)"
+//       }
+//   }
+//
+//}
 
 extension RGBMatrix: Equatable where Scalar: Equatable {
 
@@ -240,35 +240,35 @@ extension RGBMatrix: Hashable where Scalar: Hashable {
 
 }
 
-extension RGBMatrix: Codable where Scalar: Codable {
-
-   enum CodingKeys: String, CodingKey {
-       case red
-       case green
-       case blue
-   }
-
-   public init(from decoder: Decoder) throws {
-       let container = try decoder.container(keyedBy: CodingKeys.self)
-       self.red = try container.decode(Matrix.self, forKey: .red)
-       self.green = try container.decode(Matrix.self, forKey: .green)
-       self.blue = try container.decode(Matrix.self, forKey: .blue)
-       if case .malformed(let malformation) = self.state {
-           throw DecodingError.dataCorrupted(.init(codingPath: container.codingPath, debugDescription: "Malformed \(type(of: self)): \(malformation)"))
-       }
-   }
-
-   public func encode(to encoder: Encoder) throws {
-       if case .malformed(let malformation) = self.state {
-           throw EncodingError.invalidValue(self, .init(codingPath: encoder.codingPath, debugDescription: "Malformed \(type(of: self)): \(malformation)"))
-       }
-       var container = encoder.container(keyedBy: CodingKeys.self)
-       try container.encode(red, forKey: .red)
-       try container.encode(green, forKey: .green)
-       try container.encode(blue, forKey: .blue)
-   }
-
-}
+//extension RGBMatrix: Codable where Scalar: Codable {
+//
+//   enum CodingKeys: String, CodingKey {
+//       case red
+//       case green
+//       case blue
+//   }
+//
+//   public init(from decoder: Decoder) throws {
+//       let container = try decoder.container(keyedBy: CodingKeys.self)
+//       self.red = try container.decode(Matrix.self, forKey: .red)
+//       self.green = try container.decode(Matrix.self, forKey: .green)
+//       self.blue = try container.decode(Matrix.self, forKey: .blue)
+//       if case .malformed(let malformation) = self.state {
+//           throw DecodingError.dataCorrupted(.init(codingPath: container.codingPath, debugDescription: "Malformed \(type(of: self)): \(malformation)"))
+//       }
+//   }
+//
+//   public func encode(to encoder: Encoder) throws {
+//       if case .malformed(let malformation) = self.state {
+//           throw EncodingError.invalidValue(self, .init(codingPath: encoder.codingPath, debugDescription: "Malformed \(type(of: self)): \(malformation)"))
+//       }
+//       var container = encoder.container(keyedBy: CodingKeys.self)
+//       try container.encode(red, forKey: .red)
+//       try container.encode(green, forKey: .green)
+//       try container.encode(blue, forKey: .blue)
+//   }
+//
+//}
 
 extension RGBMatrix: Collection {
 

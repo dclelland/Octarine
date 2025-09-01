@@ -19,7 +19,7 @@ extension RGBMatrix where Scalar == Float {
 
         let sector = sextant.floor()
         let sectors = (0..<6).map { sector == Scalar($0) }
-        let ramp = sextant.remainder(.init(shape: shape, repeating: 2.0)).absolute()
+        let ramp = sextant.remainder(.init(shape: sextant.shape, repeating: 2.0)).absolute()
         let ramps = (0..<6).map { sectors[$0] * ramp }
 
         self.init(
@@ -49,7 +49,7 @@ extension ComplexMatrix where Scalar == Float {
 
     public func saturation() -> Matrix {
         return 1.0 / absolute()
-            .threshold(to: 1.0, with: .clampToThreshold),
+            .threshold(to: 1.0, with: .clampToThreshold)
     }
 
     public func brightness() -> Matrix {
