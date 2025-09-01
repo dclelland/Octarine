@@ -37,6 +37,7 @@ import Octarine
 
 - [ ] `RGBMatrix.Malformation` is not complete
 - [ ] `RGBMatrix+Image` should support `UInt8`
+- [ ] `ComplexMatrix.saturation` should call `Matrix.reciprocal`
 
 # Documentation
 
