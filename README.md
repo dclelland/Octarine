@@ -44,11 +44,27 @@ import Octarine
 Work in progress...
 
 <!--
-### [Images](Sources/Plinth/Extensions/Image%20Processing/Images.swift)
 
-Conversion to and from `vImage.PixelBuffer`, `CGImage`, `CIImage`, `NSImage`, and `UIImage`.
+## Core
 
-### [ComplexImages](Sources/Plinth/Extensions/Image%20Processing/ComplexImages.swift)
+### [RGBMatrix](Sources/Octarine/Core/RGBMatrix.swift)
 
-Conversion to and from `vImage.PixelBuffer`, `CGImage`, `CIImage`, `NSImage`, and `UIImage`, using an opinionated colormap to represent complex values.
+Generic RGB matrix struct.
+
+## Images
+
+### [Images](Sources/Octarine/Extensions/Images/GrayImages.swift)
+
+Conversion from `Matrix` to `vImage.PixelBuffer`, `CGImage`, `CIImage`, `NSImage`, and `UIImage` and vice versa.
+
+### [Images](Sources/Octarine/Extensions/Images/RGBImages.swift)
+
+Conversion from `RGBMatrix` to `vImage.PixelBuffer`, `CGImage`, `CIImage`, `NSImage`, and `UIImage` and vice versa.
+
+## Colormaps
+
+### [Images](Sources/Octarine/Extensions/Colormaps/Colormaps.swift)
+
+An opinionated hue, saturation and brightness mapping for `ComplexMatrix`.
+
 -->
