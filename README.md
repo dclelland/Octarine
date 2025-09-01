@@ -1,6 +1,6 @@
 # Octarine
 
-Image processing extension for Plinth, a hardware-accelerated matrix/numeric programming library for Swift.
+An image conversion extension for [Plinth](https://github.com/dclelland/Plinth), a hardware-accelerated matrix/numeric programming library for Swift.
 
 ## Installation
 
