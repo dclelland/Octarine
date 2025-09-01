@@ -65,27 +65,6 @@ public struct RGBMatrix<Scalar> {
 
 }
 
-extension RGBMatrix where Scalar == Float {
-
-    public init(hue: Matrix, saturation: Matrix, brightness: Matrix) {
-        let sextant = hue * 6.0
-        let chroma = brightness * saturation
-        let match = brightness - chroma
-
-        let sector = sextant.floor()
-        let sectors = (0..<6).map { sector == Scalar($0) }
-        let ramp = sextant.remainder(.init(shape: shape, repeating: 2.0)).absolute()
-        let ramps = (0..<6).map { sectors[$0] * ramp }
-
-        self.init(
-            red: (ramps[4] + sectors[5] + sectors[0] + ramps[1]) * chroma + match,
-            green: (ramps[0] + sectors[1] + sectors[2] + ramps[3]) * chroma + match,
-            blue: (ramps[2] + sectors[3] + sectors[4] + ramps[5]) * chroma + match
-        )
-    }
-
-}
-
 extension RGBMatrix {
 
     public init(element: Pixel) {
@@ -156,6 +135,9 @@ extension RGBMatrix {
     public var state: State {
         switch (red.state, green.state, blue.state) {
             case (.regular, .regular, .regular):
+                guard (red.shape == green.shape == blue.shape) else {
+
+                }
                 return .regular
             default:
                 return Malformation(red: red.state, green: green.state, blue: blue.state)

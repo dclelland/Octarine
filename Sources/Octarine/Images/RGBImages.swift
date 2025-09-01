@@ -1,5 +1,5 @@
 //
-//  RGBMatrix+Image.swift
+//  RGBImages.swift
 //  Octarine
 //
 //  Created by Daniel Clelland on 3/06/23.

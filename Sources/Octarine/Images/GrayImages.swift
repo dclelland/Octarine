@@ -1,6 +1,6 @@
 //
-//  Matrix+Image.swift
-//  Images
+//  GrayImages.swift
+//  Octarine
 //
 //  Created by Daniel Clelland on 3/06/23.
 //
