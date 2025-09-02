@@ -54,13 +54,19 @@ Generic RGB matrix struct.
 
 ## Images
 
-### [Images](Sources/Octarine/Extensions/Images/GrayImages.swift)
+### [GrayImages](Sources/Octarine/Extensions/Images/GrayImages.swift)
 
 Conversion from `Matrix` to `vImage.PixelBuffer`, `CGImage`, `CIImage`, `NSImage`, and `UIImage` and vice versa.
 
-### [Images](Sources/Octarine/Extensions/Images/RGBImages.swift)
+### [RGBImages](Sources/Octarine/Extensions/Images/RGBImages.swift)
 
 Conversion from `RGBMatrix` to `vImage.PixelBuffer`, `CGImage`, `CIImage`, `NSImage`, and `UIImage` and vice versa.
+
+## Bitmaps
+
+### [Bitmaps](Sources/Octarine/Extensions/Bitmaps/Bitmaps.swift)
+
+Conversion to and from floating point formats in the range `0.0...1.0` to 8-bit bitmaps in the range `0...255`.
 
 ## Colormaps
 
