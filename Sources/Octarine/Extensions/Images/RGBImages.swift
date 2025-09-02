@@ -88,11 +88,17 @@ extension RGBMatrix where Scalar == Float {
 
 extension RGBMatrix where Scalar == Float {
     
-    #warning("TODO: Finish writing `init(pixelBuffer:)`")
 
     public init(pixelBuffer: vImage.PixelBuffer<vImage.InterleavedFx3>) {
-        fatalError()
-        // self.init(shape: .init(rows: pixelBuffer.height, columns: pixelBuffer.width), elements: pixelBuffer.array)
+        let planarBuffers = pixelBuffer.planarBuffers()
+        let redBuffer = planarBuffers[0]
+        let greenBuffer = planarBuffers[1]
+        let blueBuffer = planarBuffers[2]
+        self.init(
+            red: .init(shape: .init(rows: redBuffer.height, columns: redBuffer.width), elements: redBuffer.array),
+            green: .init(shape: .init(rows: greenBuffer.height, columns: greenBuffer.width), elements: greenBuffer.array),
+            blue: .init(shape: .init(rows: blueBuffer.height, columns: blueBuffer.width), elements: blueBuffer.array)
+        )
     }
 
     public var pixelBuffer: vImage.PixelBuffer<vImage.InterleavedFx3> {

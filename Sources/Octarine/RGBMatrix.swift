@@ -64,6 +64,19 @@ public struct RGBMatrix<Scalar> {
 }
 
 extension RGBMatrix {
+    
+    public init(channels: [Matrix]) {
+        precondition(channels.count == 3)
+        self.init(
+            red: channels[0],
+            green: channels[1],
+            blue: channels[2]
+        )
+    }
+    
+}
+
+extension RGBMatrix {
 
     public init(element: Pixel) {
         self.init(shape: .square(length: 1), elements: [element])
@@ -159,12 +172,12 @@ extension RGBMatrix {
 
     public var shape: Shape {
         return Shape(
-            rows: parts.map(\.shape.rows).min()!,
-            columns: parts.map(\.shape.columns).min()!
+            rows: channels.map(\.shape.rows).min()!,
+            columns: channels.map(\.shape.columns).min()!
         )
     }
 
-    public var parts: [Matrix] {
+    public var channels: [Matrix] {
         return [red, green, blue]
     }
 
@@ -225,7 +238,7 @@ extension RGBMatrix: ExpressibleByArrayLiteral {
 extension RGBMatrix: Equatable where Scalar: Equatable {
 
    public static func == (left: RGBMatrix, right: RGBMatrix) -> Bool {
-       return left.parts == right.parts
+       return left.channels == right.channels
    }
 
 }
@@ -233,7 +246,7 @@ extension RGBMatrix: Equatable where Scalar: Equatable {
 extension RGBMatrix: Hashable where Scalar: Hashable {
 
    public func hash(into hasher: inout Hasher) {
-       hasher.combine(parts)
+       hasher.combine(channels)
    }
 
 }
