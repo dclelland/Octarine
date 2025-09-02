@@ -88,7 +88,6 @@ extension RGBMatrix where Scalar == Float {
 
 extension RGBMatrix where Scalar == Float {
     
-
     public init(pixelBuffer: vImage.PixelBuffer<vImage.InterleavedFx3>) {
         let planarBuffers = pixelBuffer.planarBuffers()
         let redBuffer = planarBuffers[0]
