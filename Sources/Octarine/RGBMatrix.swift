@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import Accelerate
-import CoreImage
 import Plinth
 
 public typealias RGBPixel<Scalar> = (red: Scalar, green: Scalar, blue: Scalar)
@@ -95,12 +93,12 @@ extension RGBMatrix {
 
 extension RGBMatrix {
 
-    //    public enum State: CustomStringConvertible {
-    //
-    //        case regular
-    //        case malformed(_ malformation: Malformation)
-    //
-    //        public var description: String {
+//        public enum State: CustomStringConvertible {
+//    
+//            case regular
+//            case malformed(_ malformation: Malformation)
+//    
+//            public var description: String {
 //            switch self {
 //            case .regular:
 //                return "Regular"

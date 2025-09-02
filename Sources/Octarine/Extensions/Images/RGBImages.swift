@@ -87,6 +87,8 @@ extension RGBMatrix where Scalar == Float {
 }
 
 extension RGBMatrix where Scalar == Float {
+    
+    #warning("TODO: Finish writing `init(pixelBuffer:)`")
 
     public init(pixelBuffer: vImage.PixelBuffer<vImage.InterleavedFx3>) {
         fatalError()
