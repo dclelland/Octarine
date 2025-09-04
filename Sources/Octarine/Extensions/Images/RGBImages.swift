@@ -23,9 +23,13 @@ extension RGBMatrix where Scalar == UInt8 {
         }
         self.init(cgImage: cgImage)
     }
-
+    
     public var nsImage: NSImage {
         return NSImage(cgImage: cgImage, size: NSSize(width: shape.columns, height: shape.rows))
+    }
+    
+    public func nsImage(colorSpace: CGColorSpace) -> NSImage {
+        return NSImage(cgImage: cgImage(colorSpace: colorSpace), size: NSSize(width: shape.columns, height: shape.rows))
     }
 
 }
@@ -46,6 +50,10 @@ extension RGBMatrix where Scalar == UInt8 {
     public var uiImage: UIImage {
         return UIImage(cgImage: cgImage)
     }
+    
+    public func uiImage(colorSpace: CGColorSpace) -> CIImage {
+        return UIImage(cgImage: cgImage(colorSpace: colorSpace))
+    }
 
 }
 
@@ -63,6 +71,10 @@ extension RGBMatrix where Scalar == UInt8 {
     public var ciImage: CIImage {
         return CIImage(cgImage: cgImage)
     }
+    
+    public func ciImage(colorSpace: CGColorSpace) -> CIImage {
+        return CIImage(cgImage: cgImage(colorSpace: colorSpace))
+    }
 
 }
 
@@ -75,6 +87,10 @@ extension RGBMatrix where Scalar == UInt8 {
 
     public var cgImage: CGImage {
         return pixelBuffer.makeCGImage(cgImageFormat: Self.cgImageFormat)!
+    }
+    
+    public func cgImage(colorSpace: CGColorSpace) -> CGImage {
+        return cgImage.copy(colorSpace: colorSpace)!
     }
 
     private static let cgImageFormat = vImage_CGImageFormat(
@@ -119,9 +135,13 @@ extension RGBMatrix where Scalar == Float {
         }
         self.init(cgImage: cgImage)
     }
-
+    
     public var nsImage: NSImage {
         return NSImage(cgImage: cgImage, size: NSSize(width: shape.columns, height: shape.rows))
+    }
+    
+    public func nsImage(colorSpace: CGColorSpace) -> NSImage {
+        return NSImage(cgImage: cgImage(colorSpace: colorSpace), size: NSSize(width: shape.columns, height: shape.rows))
     }
 
 }
@@ -142,6 +162,10 @@ extension RGBMatrix where Scalar == Float {
     public var uiImage: UIImage {
         return UIImage(cgImage: cgImage)
     }
+    
+    public func uiImage(colorSpace: CGColorSpace) -> CIImage {
+        return UIImage(cgImage: cgImage(colorSpace: colorSpace))
+    }
 
 }
 
@@ -159,6 +183,10 @@ extension RGBMatrix where Scalar == Float {
     public var ciImage: CIImage {
         return CIImage(cgImage: cgImage)
     }
+    
+    public func ciImage(colorSpace: CGColorSpace) -> CIImage {
+        return CIImage(cgImage: cgImage(colorSpace: colorSpace))
+    }
 
 }
 
@@ -171,6 +199,10 @@ extension RGBMatrix where Scalar == Float {
 
     public var cgImage: CGImage {
         return pixelBuffer.makeCGImage(cgImageFormat: Self.cgImageFormat)!
+    }
+    
+    public func cgImage(colorSpace: CGColorSpace) -> CGImage {
+        return cgImage.copy(colorSpace: colorSpace)!
     }
 
     private static let cgImageFormat = vImage_CGImageFormat(
