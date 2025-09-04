@@ -74,4 +74,10 @@ Conversion to and from floating point formats in the range `0.0...1.0` to 8-bit 
 
 An opinionated hue, saturation and brightness mapping for `ComplexMatrix`.
 
+## Gamma
+
+### [Gamma](Sources/Octarine/Extensions/Gamma/Gamma.swift)
+
+Gamma encoding and decoding.
+
 -->
